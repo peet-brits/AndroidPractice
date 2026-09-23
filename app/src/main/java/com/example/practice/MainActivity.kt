@@ -13,7 +13,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.practice.icons.AppIcons
 import com.example.practice.ui.theme.PracticeTheme
@@ -24,39 +26,53 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PracticeTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        @OptIn(ExperimentalMaterial3Api::class)
-                        TopAppBar(
-                            title = {
-                                Text(text = "My notes")
-                            },
-                            navigationIcon = {
-                                IconButton(onClick = { }) {
-                                    Icon(
-                                        imageVector = AppIcons.ArrowBack,
-                                        contentDescription = "Go back"
-                                    )
-                                }
-                            }
-                        )
-                    }
-                ) { innerPadding ->
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    ) {
-                        items(100) {
-                            Text(
-                                text = "Item $it",
-                                modifier = Modifier.padding(16.dp)
-                            )
-                        }
-                    }
-                }
+                MainScreen()
             }
         }
+    }
+}
+
+@Composable
+private fun MainScreen() {
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize(),
+        topBar = {
+            @OptIn(ExperimentalMaterial3Api::class)
+            TopAppBar(
+                title = {
+                    Text(text = "My notes")
+                },
+                navigationIcon = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = AppIcons.ArrowBack,
+                            contentDescription = "Go back"
+                        )
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            items(100) {
+                Text(
+                    text = "Item $it",
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun MainScreenPreview() {
+    PracticeTheme {
+        MainScreen()
     }
 }

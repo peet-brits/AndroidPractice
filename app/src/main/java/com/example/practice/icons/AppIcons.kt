@@ -8,4 +8,10 @@ import com.example.practice.R
 object AppIcons {
     val ArrowBack
     @Composable get() = ImageVector.vectorResource(R.drawable.ic_arrow_back)
+
+    val Favourite
+    @Composable get() = ImageVector.vectorResource(R.drawable.ic_favorite)
+
+    val Edit
+    @Composable get() = ImageVector.vectorResource(R.drawable.ic_edit)
 }

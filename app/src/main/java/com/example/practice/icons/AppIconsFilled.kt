@@ -6,7 +6,7 @@ import androidx.compose.ui.res.vectorResource
 import com.example.practice.R
 
 object AppIconsFilled {
-    val Home @Composable get() = ImageVector.vectorResource(R.drawable.ic_home_filled)
     val Chat @Composable get() = ImageVector.vectorResource(R.drawable.ic_chat_filled)
+    val Home @Composable get() = ImageVector.vectorResource(R.drawable.ic_home_filled)
     val Settings @Composable get() = ImageVector.vectorResource(R.drawable.ic_settings_filled)
 }

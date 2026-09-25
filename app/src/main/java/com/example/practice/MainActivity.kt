@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -210,26 +211,32 @@ private fun MainScreen(
             }
         }
     ) { innerPadding ->
-        LazyColumn(
+        Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            items(100) {
-                Text(
-                    text = "Item $it",
-                    modifier = Modifier.padding(16.dp)
+            if (isBigScreen) {
+                NavigationSideBar(
+                    items = items,
+                    selectedItemIndex = selectedItemIndex,
+                    onNavigate = { selectedItemIndex = it }
                 )
             }
-        }
-    }
 
-    if (isBigScreen) {
-        NavigationSideBar(
-            items = items,
-            selectedItemIndex = selectedItemIndex,
-            onNavigate = { selectedItemIndex = it }
-        )
+            LazyColumn(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+            ) {
+                items(100) {
+                    Text(
+                        text = "Item $it",
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+            }
+        }
     }
 }
 

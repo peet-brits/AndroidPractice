@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -37,38 +39,46 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        ProjectScreen(
-            project = ProjectData(
-                heading = "My Solution",
-                description = "This is a preview.",
-                formattedDateTime = "Mar 5, 10:00"
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item {
+            ProjectScreen(
+                project = ProjectData(
+                    heading = "My Solution",
+                    description = "This is a preview.",
+                    formattedDateTime = "Mar 5, 10:00"
+                )
             )
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        ProjectCard(
-            project = Project(
-                title = "Sample Solution",
-                description = "This is a preview.",
-                formattedDateTime = "Mar 5, 10:00"
+        }
+        item {
+            ProjectCard(
+                project = Project(
+                    title = "Sample Solution",
+                    description = "This is a preview.",
+                    formattedDateTime = "Mar 5, 10:00"
+                )
             )
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        ProjectScreen(
-            project = ProjectData(
-                heading = "My ${baconIpsum.lowercase()}",
-                description = baconIpsum,
-                formattedDateTime = "Mar 5, 10:00"
+        }
+        item {
+            ProjectScreen(
+                project = ProjectData(
+                    heading = "My ${baconIpsum.lowercase()}",
+                    description = baconIpsum,
+                    formattedDateTime = "Mar 5, 10:00"
+                )
             )
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        ProjectCard(
-            project = Project(
-                title = "Sample ${baconIpsum.lowercase()}",
-                description = baconIpsum,
-                formattedDateTime = "Mar 5, 10:00"
+        }
+        item {
+            ProjectCard(
+                project = Project(
+                    title = "Sample ${baconIpsum.lowercase()}",
+                    description = baconIpsum,
+                    formattedDateTime = "Mar 5, 10:00"
+                )
             )
-        )
+        }
     }
 }
 

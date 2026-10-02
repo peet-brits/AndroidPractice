@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.example.practice
 
@@ -32,9 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -46,6 +44,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.window.core.layout.WindowSizeClass
 import com.example.practice.icons.AppIcons
 import com.example.practice.icons.AppIconsFilled
 import com.example.practice.ui.theme.PracticeTheme
@@ -57,9 +56,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 val showBottomAppBar = false
-                val windowClass = calculateWindowSizeClass(this)
-                val isBigScreen = windowClass.widthSizeClass > WindowWidthSizeClass.Compact
-                MainScreen(showBottomAppBar, isBigScreen = isBigScreen)
+                //val windowClass = calculateWindowSizeClass(this) // this requires an activity.
+                //val isBigScreen = windowClass.widthSizeClass > WindowWidthSizeClass.Compact
+                MainScreen(showBottomAppBar = showBottomAppBar)
             }
         }
     }
@@ -76,8 +75,7 @@ data class NavigationItem(
 
 @Composable
 private fun MainScreen(
-    showBottomAppBar: Boolean,
-    isBigScreen: Boolean
+    showBottomAppBar: Boolean = false
 ) {
     val items = listOf(
         NavigationItem(
@@ -100,6 +98,11 @@ private fun MainScreen(
             hasNews = true
         )
     )
+
+    val windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
+    // The main decider is width, but I'm adding height because a phone in landscape mode doesn't have enough space to show all the icons.
+    val isBigScreen = windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) &&
+            windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     var selectedItemIndex by rememberSaveable {
@@ -316,50 +319,38 @@ fun NavigationIcon(
     }
 }
 
-// TODO: move the window class calculation to a composable to simplify the preview.
-// Option 1: "@PreviewScreenSizes" before "@Preview".
-// Option 2: "device = Devices.NEXUS_10" in "@Preview".
-
-@Preview(showBackground = true, name = "Compact")
-@Composable
-private fun MainScreenPreviewCompact() {
-    PracticeTheme(darkTheme = false) {
-        MainScreen(
-            showBottomAppBar = false,
-            isBigScreen = false
-        )
-    }
-}
-
-@Preview(showBackground = true, name = "Rail")
-@Composable
-private fun MainScreenPreviewRail() {
-    PracticeTheme(darkTheme = true) {
-        MainScreen(
-            showBottomAppBar = false,
-            isBigScreen = true
-        )
-    }
-}
-
-@Preview(showBackground = true, name = "Bottom App Bar")
+@Preview(showBackground = true, name = "Bottom App Bar", heightDp = 400)
 @Composable
 private fun MainScreenPreviewBottomAppBar() {
-    PracticeTheme(darkTheme = true) {
+    PracticeTheme(darkTheme = false) {
         MainScreen(
-            showBottomAppBar = true,
-            isBigScreen = false
+            showBottomAppBar = true
         )
     }
 }
 
-@Preview(showBackground = true, name = "Bottom App Bar With Rail")
+@Preview(showBackground = true, name = "Bottom Navigation Bar", heightDp = 400)
 @Composable
-private fun MainScreenPreviewBottomAppBarRail() {
-    PracticeTheme(darkTheme = true) {
+private fun MainScreenPreviewBottomNav() {
+    PracticeTheme(darkTheme = false) {
         MainScreen(
-            showBottomAppBar = true,
-            isBigScreen = true
+            showBottomAppBar = false
         )
+    }
+}
+
+//@PreviewScreenSizes
+@Preview(
+    showBackground = true,
+    name = "Navigation Bar",
+//    device = Devices.PHONE + ",orientation=landscape"
+//    device = Devices.TABLET
+    widthDp = 600, // 500 = bottom, 600 = left
+    heightDp = 500 // 400 = bottom, 500 = left
+)
+@Composable
+private fun MainScreenPreviewNavBar() {
+    PracticeTheme(darkTheme = false) {
+        MainScreen()
     }
 }

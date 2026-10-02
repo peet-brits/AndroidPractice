@@ -56,7 +56,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
         ProjectScreen(
             project = ProjectData(
-                heading = baconIpsum,
+                heading = "My ${baconIpsum.lowercase()}",
                 description = baconIpsum,
                 formattedDateTime = "Mar 5, 10:00"
             )
@@ -64,7 +64,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
         ProjectCard(
             project = Project(
-                title = baconIpsum,
+                title = "Sample ${baconIpsum.lowercase()}",
                 description = baconIpsum,
                 formattedDateTime = "Mar 5, 10:00"
             )

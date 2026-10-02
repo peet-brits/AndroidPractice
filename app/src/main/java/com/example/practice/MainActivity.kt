@@ -316,6 +316,10 @@ fun NavigationIcon(
     }
 }
 
+// TODO: move the window class calculation to a composable to simplify the preview.
+// Option 1: "@PreviewScreenSizes" before "@Preview".
+// Option 2: "device = Devices.NEXUS_10" in "@Preview".
+
 @Preview(showBackground = true, name = "Compact")
 @Composable
 private fun MainScreenPreviewCompact() {

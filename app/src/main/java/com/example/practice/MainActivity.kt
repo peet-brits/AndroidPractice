@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
 import com.example.practice.views.Project
 import com.example.practice.views.ProjectCard
+import com.example.practice.views.ProjectData
 import com.example.practice.views.ProjectScreen
 
 class MainActivity : ComponentActivity() {
@@ -37,9 +38,11 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         ProjectScreen(
-            heading = "My Solution",
-            description = "This is a preview.",
-            timestamp = "Mar 5, 10:00"
+            project = ProjectData(
+                heading = "My Solution",
+                description = "This is a preview.",
+                formattedDateTime = "Mar 5, 10:00"
+            )
         )
         Spacer(modifier = Modifier.height(16.dp))
         ProjectCard(

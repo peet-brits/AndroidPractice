@@ -18,12 +18,16 @@ import androidx.compose.ui.unit.dp
 import com.example.practice.icons.AppIcons
 import com.example.practice.ui.theme.PracticeTheme
 
+data class ProjectData(
+    val heading: String,
+    val description: String,
+    val formattedDateTime: String
+)
+
 @Composable
 fun ProjectScreen(
     modifier: Modifier = Modifier,
-    heading: String,
-    description: String,
-    timestamp: String
+    project: ProjectData
 ) {
     Column(
         modifier = modifier
@@ -46,7 +50,7 @@ fun ProjectScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
-                    text = heading
+                    text = project.heading
                 )
                 Image(
                     imageVector = AppIcons.MoreHoriz,
@@ -57,12 +61,12 @@ fun ProjectScreen(
         Text(
             modifier = Modifier
                 .padding(start = 32.dp),
-            text = description
+            text = project.description
         )
         Text(
             modifier = Modifier
                 .align(Alignment.End),
-            text = timestamp
+            text = project.formattedDateTime
         )
     }
 }
@@ -72,9 +76,11 @@ fun ProjectScreen(
 fun ProjectScreenPreviewSimple() {
     PracticeTheme {
         ProjectScreen(
-            heading = "Project X",
-            description = "This is a short description.",
-            timestamp = "Mar 5, 10:00"
+            project = ProjectData(
+                heading = "Project X",
+                description = "This is a short description.",
+                formattedDateTime = "Mar 5, 10:00"
+            )
         )
     }
 }
@@ -84,9 +90,11 @@ fun ProjectScreenPreviewSimple() {
 fun ProjectScreenPreviewOverflow() {
     PracticeTheme {
         ProjectScreen(
-            heading = "Project X",
-            description = "Bacon ipsum dolor amet pork chop flank landjaeger cupim chicken ham, tail kielbasa swine burgdoggen spare ribs meatball. Tongue burgdoggen shank meatloaf ham hock tenderloin turkey, buffalo spare ribs. Capicola tri-tip spare ribs, drumstick landjaeger meatloaf chicken pork chop ground round turducken beef ribs shankle ribeye. Hamburger burgdoggen shank, tri-tip jerky prosciutto rump brisket meatloaf buffalo beef ribs short ribs t-bone sausage.",
-            timestamp = "Mar 5, 10:00"
+            project = ProjectData(
+                heading = "Project X",
+                description = "Bacon ipsum dolor amet pork chop flank landjaeger cupim chicken ham, tail kielbasa swine burgdoggen spare ribs meatball. Tongue burgdoggen shank meatloaf ham hock tenderloin turkey, buffalo spare ribs. Capicola tri-tip spare ribs, drumstick landjaeger meatloaf chicken pork chop ground round turducken beef ribs shankle ribeye. Hamburger burgdoggen shank, tri-tip jerky prosciutto rump brisket meatloaf buffalo beef ribs short ribs t-bone sausage.",
+                formattedDateTime = "Mar 5, 10:00"
+            )
         )
     }
 }

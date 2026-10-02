@@ -4,10 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,49 +18,47 @@ import androidx.compose.ui.unit.dp
 import com.example.practice.icons.AppIcons
 import com.example.practice.ui.theme.PracticeTheme
 
-val Orange = Color(0xFFE4694D)
-
 @Composable
 fun ProjectScreen(
     modifier: Modifier = Modifier,
-    heading: String = "Project X",
-    description: String = "This is a short description",
-    timestamp: String = "Mar 5, 10:00"
+    heading: String,
+    description: String,
+    timestamp: String
 ) {
     Column(
         modifier = modifier
             .background(
-                color = Orange,
+                color = Color(0xFFE4694D),
                 shape = RoundedCornerShape(5.dp)
             )
+            .padding(16.dp)
     ) {
-        Row {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             Image(
                 imageVector = AppIcons.CheckCircle,
                 contentDescription = "Check"
             )
-            Column(
+            Row(
                 modifier = Modifier
-                    .width(IntrinsicSize.Max),
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    Text(
-                        text = heading
-                    )
-                    Image(
-                        imageVector = AppIcons.MoreHoriz,
-                        contentDescription = "More"
-                    )
-                }
                 Text(
-                    text = description
+                    text = heading
+                )
+                Image(
+                    imageVector = AppIcons.MoreHoriz,
+                    contentDescription = "More"
                 )
             }
         }
+        Text(
+            modifier = Modifier
+                .padding(start = 32.dp),
+            text = description
+        )
         Text(
             modifier = Modifier
                 .align(Alignment.End),
@@ -76,7 +73,7 @@ fun ProjectScreenPreviewSimple() {
     PracticeTheme {
         ProjectScreen(
             heading = "Project X",
-            description = "This is a short description",
+            description = "This is a short description.",
             timestamp = "Mar 5, 10:00"
         )
     }

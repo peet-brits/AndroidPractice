@@ -111,6 +111,20 @@ fun ProjectCard(
     showBackground = true
 )
 @Composable
+private fun ProjectCardPreviewShort() {
+    ProjectCard(
+        project = Project(
+            title = "Project X",
+            description = "This is a short description.",
+            formattedDateTime = "Mar 5, 10:00"
+        )
+    )
+}
+
+@Preview(
+    showBackground = true
+)
+@Composable
 private fun ProjectCardPreview() {
     ProjectCard(
         project = Project(

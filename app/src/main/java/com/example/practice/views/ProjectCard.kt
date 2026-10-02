@@ -128,7 +128,7 @@ private fun ProjectCardPreviewShort() {
 private fun ProjectCardPreview() {
     ProjectCard(
         project = Project(
-            title = "Project X",
+            title = "Hello ".repeat(10),
             description = """
                 Bacon ipsum dolor amet meatloaf andouille landjaeger, turducken turkey chuck flank tongue. Alcatra chislic shankle strip steak ball tip beef venison. Doner spare ribs shank ham hock, turkey filet mignon buffalo rump cupim corned beef drumstick. Pork corned beef pig shoulder cow sausage picanha prosciutto doner beef ribs brisket bacon.
             """.trimIndent(),

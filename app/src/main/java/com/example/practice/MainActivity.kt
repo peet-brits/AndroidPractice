@@ -19,6 +19,7 @@ import com.example.practice.views.Project
 import com.example.practice.views.ProjectCard
 import com.example.practice.views.ProjectData
 import com.example.practice.views.ProjectScreen
+import com.example.practice.views.baconIpsum
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,10 +53,26 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 formattedDateTime = "Mar 5, 10:00"
             )
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        ProjectScreen(
+            project = ProjectData(
+                heading = baconIpsum,
+                description = baconIpsum,
+                formattedDateTime = "Mar 5, 10:00"
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        ProjectCard(
+            project = Project(
+                title = baconIpsum,
+                description = baconIpsum,
+                formattedDateTime = "Mar 5, 10:00"
+            )
+        )
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, heightDp = 1200)
 @Composable
 fun MainScreenPreview() {
     PracticeTheme {

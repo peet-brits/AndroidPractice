@@ -1,0 +1,3 @@
+package com.example.practice.views
+
+const val baconIpsum = "Bacon ipsum dolor amet pork chop flank landjaeger cupim chicken ham, tail kielbasa swine burgdoggen spare ribs meatball. Tongue burgdoggen shank meatloaf ham hock tenderloin turkey, buffalo spare ribs. Capicola tri-tip spare ribs, drumstick landjaeger meatloaf chicken pork chop ground round turducken beef ribs shankle ribeye. Hamburger burgdoggen shank, tri-tip jerky prosciutto rump brisket meatloaf buffalo beef ribs short ribs t-bone sausage."

@@ -1,6 +1,5 @@
 package com.example.practice.views
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,13 +7,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.practice.icons.AppIcons
 import com.example.practice.ui.theme.PracticeTheme
 
@@ -38,35 +42,50 @@ fun ProjectScreen(
             .padding(16.dp)
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
+            Icon(
                 imageVector = AppIcons.CheckCircle,
-                contentDescription = "Check"
+                contentDescription = "Check",
+                tint = Color.White
             )
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = project.heading
+                    text = project.heading,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    fontSize = 24.sp
                 )
-                Image(
-                    imageVector = AppIcons.MoreHoriz,
-                    contentDescription = "More"
-                )
+                IconButton(
+                    onClick = { }
+                ) {
+                    Icon(
+                        imageVector = AppIcons.MoreHoriz,
+                        contentDescription = "More",
+                        tint = Color.White
+                    )
+                }
             }
         }
         Text(
             modifier = Modifier
                 .padding(start = 32.dp),
-            text = project.description
+            text = project.description,
+            color = Color.White
         )
         Text(
             modifier = Modifier
                 .align(Alignment.End),
-            text = project.formattedDateTime
+            text = project.formattedDateTime,
+            color = Color.White
         )
     }
 }
@@ -77,7 +96,7 @@ fun ProjectScreenPreviewSimple() {
     PracticeTheme {
         ProjectScreen(
             project = ProjectData(
-                heading = "Project X",
+                heading = "Hello ".repeat(10),
                 description = "This is a short description.",
                 formattedDateTime = "Mar 5, 10:00"
             )
@@ -92,7 +111,7 @@ fun ProjectScreenPreviewOverflow() {
         ProjectScreen(
             project = ProjectData(
                 heading = "Project X",
-                description = "Bacon ipsum dolor amet pork chop flank landjaeger cupim chicken ham, tail kielbasa swine burgdoggen spare ribs meatball. Tongue burgdoggen shank meatloaf ham hock tenderloin turkey, buffalo spare ribs. Capicola tri-tip spare ribs, drumstick landjaeger meatloaf chicken pork chop ground round turducken beef ribs shankle ribeye. Hamburger burgdoggen shank, tri-tip jerky prosciutto rump brisket meatloaf buffalo beef ribs short ribs t-bone sausage.",
+                description = baconIpsum,
                 formattedDateTime = "Mar 5, 10:00"
             )
         )

@@ -99,10 +99,11 @@ private fun MainScreen(
         )
     )
 
-    val windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
     // The main decider is width, but I'm adding height because a phone in landscape mode doesn't have enough space to show all the icons.
-    val isBigScreen = windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) &&
-            windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
+    val isBigScreen = currentWindowAdaptiveInfoV2().windowSizeClass.isAtLeastBreakpoint(
+        widthDpBreakpoint = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
+        heightDpBreakpoint = WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND
+    )
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     var selectedItemIndex by rememberSaveable {
@@ -345,8 +346,8 @@ private fun MainScreenPreviewBottomNav() {
     name = "Navigation Bar",
 //    device = Devices.PHONE + ",orientation=landscape"
 //    device = Devices.TABLET
-    widthDp = 600, // 500 = bottom, 600 = left
-    heightDp = 500 // 400 = bottom, 500 = left
+    widthDp = 600, // medium = 600
+    heightDp = 500 // medium = 480
 )
 @Composable
 private fun MainScreenPreviewNavBar() {

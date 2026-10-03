@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -16,14 +17,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    FreakyDivider(
+                    ColumnDividerDemo(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -41,18 +48,42 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-val values = mapOf(
-    "Item 1" to 3,
-    "Item 2" to 7,
-    "Item 3" to 7,
-    "Item 4" to 18,
-    "Item 5" to 23,
-)
+@Composable
+fun ColumnDividerDemo(modifier: Modifier = Modifier) {
+    val values = mapOf(
+        "Item 1" to 3,
+        "Item 2" to 7,
+        "Item 3" to 7,
+        "Item 4" to 18,
+        "Item 5" to 24,
+    )
+
+    val min = values.values.min().toFloat()
+    val max = values.values.max().toFloat() + 1
+    var sliderValue by rememberSaveable { mutableFloatStateOf((min + max) / 3) }
+    val position = sliderValue.roundToInt()
+    Column(modifier = modifier) {
+        Slider(
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
+            value = sliderValue,
+            onValueChange = { sliderValue = it },
+            valueRange = min..max,
+            //steps = (max - min).toInt() - 1,
+        )
+        Text("$min - $max -> $position ($sliderValue)")
+        ColumnDivider(
+            values = values,
+            dividerPosition = position,
+        )
+    }
+}
 
 @Composable
-fun FreakyDivider(
+fun ColumnDivider(
     modifier: Modifier = Modifier,
-    dividerPosition: Int = 10,
+    values: Map<String, Int>,
+    dividerPosition: Int,
 ) {
     val entries = values.entries.toList()
     val dividerIndex = entries.indexOfFirst { (_, number) ->
@@ -107,8 +138,8 @@ private fun BoxScope.ItemDivider(
 
 @Preview(showBackground = true, widthDp = 120)
 @Composable
-fun FreakyDividerPreview() {
+fun ColumnDividerDemoPreview() {
     PracticeTheme {
-        FreakyDivider()
+        ColumnDividerDemo()
     }
 }

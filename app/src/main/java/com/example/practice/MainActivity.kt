@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -54,7 +55,9 @@ fun FreakyDivider(
     dividerPosition: Int = 10,
 ) {
     val entries = values.entries.toList()
-    var dividerPlaced = false
+    val dividerIndex = entries.indexOfFirst { (_, number) ->
+        dividerPosition <= number
+    }
 
     LazyColumn(
         modifier = modifier
@@ -63,36 +66,42 @@ fun FreakyDivider(
         contentPadding = PaddingValues(vertical = 6.dp),
     ) {
         itemsIndexed(entries) { index, (item, number) ->
-            val isLast = index == entries.lastIndex
-
             Box {
-                if (dividerPosition <= number && !dividerPlaced) {
-                    dividerPlaced = true
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .padding(horizontal = 4.dp)
-                            .offset(y = (-4).dp),
-                        thickness = 2.dp
-                    )
-                }
-
-                if (isLast && !dividerPlaced) {
-                    dividerPlaced = true
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(horizontal = 4.dp)
-                            .offset(y = 4.dp),
-                        thickness = 2.dp
-                    )
-                }
-
+                ItemDivider(
+                    isDividerBefore = index == dividerIndex,
+                    isDividerAfter = index == entries.lastIndex && dividerIndex == -1
+                )
                 Text(
                     text = "$item = $number",
                     modifier = Modifier.background(Color.Red)
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun BoxScope.ItemDivider(
+    isDividerBefore: Boolean,
+    isDividerAfter: Boolean,
+) {
+    if (isDividerBefore) {
+        HorizontalDivider(
+            modifier = Modifier
+                .padding(horizontal = 4.dp)
+                .offset(y = (-4).dp),
+            thickness = 2.dp
+        )
+    }
+
+    if (isDividerAfter) {
+        HorizontalDivider(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(horizontal = 4.dp)
+                .offset(y = 4.dp),
+            thickness = 2.dp
+        )
     }
 }
 

@@ -49,37 +49,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ColumnDividerDemo(modifier: Modifier = Modifier) {
-    val values = mapOf(
-        "Item 1" to 3,
-        "Item 2" to 7,
-        "Item 3" to 7,
-        "Item 4" to 18,
-        "Item 5" to 24,
-    )
-
-    val min = values.values.min().toFloat()
-    val max = values.values.max().toFloat() + 1
-    var sliderValue by rememberSaveable { mutableFloatStateOf((min + max) / 3) }
-    val position = sliderValue.roundToInt()
-    Column(modifier = modifier) {
-        Slider(
-            modifier = Modifier
-                .padding(horizontal = 16.dp),
-            value = sliderValue,
-            onValueChange = { sliderValue = it },
-            valueRange = min..max,
-            //steps = (max - min).toInt() - 1,
-        )
-        Text("$min - $max -> $position ($sliderValue)")
-        ColumnDivider(
-            values = values,
-            dividerPosition = position,
-        )
-    }
-}
-
-@Composable
 fun ColumnDivider(
     modifier: Modifier = Modifier,
     values: Map<String, Int>,
@@ -136,9 +105,41 @@ private fun BoxScope.ItemDivider(
     }
 }
 
+@Composable
+private fun ColumnDividerDemo(modifier: Modifier = Modifier) {
+    val values = mapOf(
+        "Item 1" to 3 + 10,
+        "Item 2" to 7 + 10,
+        "Item 3" to 7 + 10,
+        "Item 4" to 18 + 10,
+        "Item 5" to 24 + 10,
+    )
+
+    val min = values.values.min().toFloat()
+    val max = values.values.max().toFloat() + 1
+    var sliderValue by rememberSaveable { mutableFloatStateOf(min + (max - min) / 3) }
+    val position = sliderValue.roundToInt()
+
+    Column(modifier = modifier) {
+        Slider(
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
+            value = sliderValue,
+            onValueChange = { sliderValue = it },
+            valueRange = min..max,
+            //steps = (max - min).toInt() - 1,
+        )
+        Text("$min - $max -> $position ($sliderValue)")
+        ColumnDivider(
+            values = values,
+            dividerPosition = position,
+        )
+    }
+}
+
 @Preview(showBackground = true, widthDp = 120)
 @Composable
-fun ColumnDividerDemoPreview() {
+private fun ColumnDividerDemoPreview() {
     PracticeTheme {
         ColumnDividerDemo()
     }

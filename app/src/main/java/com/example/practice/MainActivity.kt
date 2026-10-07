@@ -32,6 +32,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -123,8 +125,8 @@ fun ColumnDivider2(
     LazyColumn(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.Blue),
-        contentPadding = PaddingValues(vertical = 2.dp),
+            .background(Color.LightGray),
+        contentPadding = PaddingValues(vertical = 3.dp),
     ) {
         if (d1) item { V2Divider() }
         if (t1) item { V2Text() }
@@ -138,8 +140,8 @@ fun ColumnDivider2(
 private fun V2Text() {
     Text(
         modifier = Modifier
-            .padding(4.dp)
-            .offset(y = 0.5.dp)
+            .fillMaxWidth()
+            .padding(top = 4.dp, bottom = 4.dp)
             .background(Color.Red),
         text = "Test",
     )
@@ -149,17 +151,22 @@ private fun V2Text() {
 private fun V2Divider() {
     Box(
         modifier = Modifier
-            .background(Color.Yellow)
+            .fillMaxWidth()
             .height(0.dp)
-    ) {
-        HorizontalDivider(
-            modifier = Modifier
-                .padding(horizontal = 4.dp)
-                .offset(y = (-1).dp)
-                .background(Color.Green),
-            thickness = 2.dp
-        )
-    }
+            .drawBehind {
+                drawLine(
+                    color = Color.Black,
+                    start = Offset(x = 2.dp.toPx(), y = 0f),
+                    end = Offset(x = size.width, y = 0f),
+                    strokeWidth = 2.dp.toPx(),
+                )
+                drawCircle(
+                    color = Color.Black,
+                    radius = 3.dp.toPx(),
+                    center = Offset(x = 3.dp.toPx(), y = 0F),
+                )
+            }
+    )
 }
 
 @Composable

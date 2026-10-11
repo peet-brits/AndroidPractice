@@ -93,20 +93,22 @@ private fun BoxScope.ItemDivider(
     isDividerBefore: Boolean,
     isDividerAfter: Boolean,
 ) {
+    // EDIT. Offset only applies to the content or subsequent modifiers, not the item itself.
     if (isDividerBefore) {
         HorizontalDivider(
             modifier = Modifier
                 .padding(horizontal = 4.dp)
+                .background(Color.Yellow) // demo: what's going on
                 .offset(y = (-4).dp),
             thickness = 2.dp
         )
     }
-
     if (isDividerAfter) {
         HorizontalDivider(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(horizontal = 4.dp)
+                .background(Color.Yellow) // demo: what's going on
                 .offset(y = 4.dp),
             thickness = 2.dp
         )
@@ -153,6 +155,8 @@ private fun V2Divider() {
         modifier = Modifier
             .fillMaxWidth()
             .height(0.dp)
+            //.background(Color.Yellow) // demo: what's going on
+            //.height(4.dp) // demo, should be 0.dp for final version
             .drawBehind {
                 drawLine(
                     color = Color.Black,

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -37,7 +38,15 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column {
         Text(
-            text = "Hello $name!",
+            text = "Display Small",
+            style = MaterialTheme.typography.displaySmall,
+        )
+        Text(
+            text = "Headline Small",
+            style = MaterialTheme.typography.headlineSmall,
+        )
+        Text(
+            text = "Hello, my $name!",
             modifier = modifier
         )
         TextField(value = "Hello", onValueChange = {})

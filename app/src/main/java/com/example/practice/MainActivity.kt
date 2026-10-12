@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -36,7 +37,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
         Text(
             text = "Display Small",
             style = MaterialTheme.typography.displaySmall,
@@ -47,9 +51,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         )
         Text(
             text = "Hello, my $name!",
-            modifier = modifier
         )
-        TextField(value = "Hello", onValueChange = {})
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            value = "Static Display",
+            onValueChange = {},
+            enabled = false,
+        )
         Button(onClick = {}) { Text("Hello") }
     }
 }

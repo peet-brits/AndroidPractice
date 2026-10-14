@@ -1,5 +1,6 @@
 package com.example.practice.advanced
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Checkbox
@@ -41,6 +43,8 @@ fun IntrinsicBox(intrinsicSize: IntrinsicSize) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(100.dp)
+                .background(Color.Green)
         )
     }
 }
@@ -52,7 +56,7 @@ private fun IntrinsicBoxPreview() {
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text("Box - IntrinsicSize.Max (no content = no size)")
+            Text("Box - IntrinsicSize.Max (no content = no size, except provided modifiers)")
             IntrinsicBox(IntrinsicSize.Max)
             Text("Box - IntrinsicSize.Min")
             IntrinsicBox(IntrinsicSize.Min)

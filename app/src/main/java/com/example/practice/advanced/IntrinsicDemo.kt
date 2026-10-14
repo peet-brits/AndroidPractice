@@ -4,9 +4,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
@@ -19,12 +21,23 @@ import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
 
 @Composable
-fun IntrinsicBox(intrinsicSize: IntrinsicSize) {
+fun DemoColumn(
+    intrinsicSize: IntrinsicSize,
+    content: @Composable ColumnScope.() -> Unit,
+) {
     Column(
         modifier = Modifier
             .width(intrinsicSize)
             .border(width = 2.dp, color = Color.Red)
+            .padding(2.dp)
     ) {
+        content()
+    }
+}
+
+@Composable
+fun IntrinsicBox(intrinsicSize: IntrinsicSize) {
+    DemoColumn(intrinsicSize) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -49,11 +62,7 @@ private fun IntrinsicBoxPreview() {
 
 @Composable
 fun IntrinsicText(intrinsicSize: IntrinsicSize, repeat: Int, text: String = "Hello ") {
-    Column(
-        modifier = Modifier
-            .width(intrinsicSize)
-            .border(width = 2.dp, color = Color.Red)
-    ) {
+    DemoColumn(intrinsicSize) {
         Text(text.repeat(repeat))
     }
 }
@@ -83,11 +92,7 @@ fun IntrinsicColumn(
     text1: String = "This is my text",
     text2: String = "a ",
 ) {
-    Column(
-        modifier = Modifier
-            .width(intrinsicSize)
-            .border(width = 2.dp, color = Color.Red)
-    ) {
+    DemoColumn(intrinsicSize) {
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -126,34 +131,3 @@ private fun IntrinsicColumnPreview() {
         }
     }
 }
-
-/*
-@Composable
-fun IntrinsicRow(intrinsicSize: IntrinsicSize, repeat: Int) {
-    Row(
-        modifier = Modifier
-            .width(intrinsicSize)
-            .border(width = 2.dp, color = Color.Red)
-    ) {
-        Text("a ".repeat(repeat)) //, modifier = Modifier.weight(1f)
-        Checkbox(checked = true, onCheckedChange = {})
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun IntrinsicRowPreview() {
-    PracticeTheme {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            Text("Row.IntrinsicSize.Max")
-            IntrinsicRow(IntrinsicSize.Max, 10)
-            IntrinsicRow(IntrinsicSize.Max, 40)
-            Text("Row.IntrinsicSize.Min")
-            IntrinsicRow(IntrinsicSize.Min, 1)
-            IntrinsicRow(IntrinsicSize.Min, 7)
-        }
-    }
-}
-*/

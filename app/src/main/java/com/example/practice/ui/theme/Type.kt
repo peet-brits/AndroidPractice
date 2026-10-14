@@ -17,6 +17,10 @@ val SpaceGrotesk = FontFamily(
     Font(resId = R.font.space_grotesk_variable_font),
 )
 
+val Yarndings12 = FontFamily(
+    Font(resId = R.font.yarndings12_regular)
+)
+
 val AppTypography = Typography().run {
     copy(
         displayLarge = displayLarge.copy(fontFamily = BitCountInk),

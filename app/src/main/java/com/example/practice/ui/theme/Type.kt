@@ -5,39 +5,39 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import com.example.practice.R
 
-val BlackOpsOne = FontFamily(
+val blackOpsOne = FontFamily(
     Font(resId = R.font.black_ops_one_regular),
 )
 
-val BitCountInk = FontFamily(
+val bitCountInk = FontFamily(
     Font(resId = R.font.bitcount_ink_variable_font),
 )
 
-val SpaceGrotesk = FontFamily(
+val spaceGrotesk = FontFamily(
     Font(resId = R.font.space_grotesk_variable_font),
 )
 
-val Yarndings12 = FontFamily(
+val yarndings12 = FontFamily(
     Font(resId = R.font.yarndings12_regular)
 )
 
-val AppTypography = Typography().run {
+val typography = Typography().run {
     copy(
-        displayLarge = displayLarge.copy(fontFamily = BitCountInk),
-        displayMedium = displayMedium.copy(fontFamily = BitCountInk),
-        displaySmall = displaySmall.copy(fontFamily = BitCountInk),
-        headlineLarge = headlineLarge.copy(fontFamily = BlackOpsOne),
-        headlineMedium = headlineMedium.copy(fontFamily = BlackOpsOne),
-        headlineSmall = headlineSmall.copy(fontFamily = BlackOpsOne),
-        titleLarge = titleLarge.copy(fontFamily = SpaceGrotesk),
-        titleMedium = titleMedium.copy(fontFamily = SpaceGrotesk),
-        titleSmall = titleSmall.copy(fontFamily = SpaceGrotesk),
-        bodyLarge = bodyLarge.copy(fontFamily = SpaceGrotesk),
-        bodyMedium = bodyMedium.copy(fontFamily = SpaceGrotesk),
-        bodySmall = bodySmall.copy(fontFamily = SpaceGrotesk),
-        labelLarge = labelLarge.copy(fontFamily = SpaceGrotesk),
-        labelMedium = labelMedium.copy(fontFamily = SpaceGrotesk),
-        labelSmall = labelSmall.copy(fontFamily = SpaceGrotesk),
+        displayLarge = displayLarge.copy(fontFamily = bitCountInk),
+        displayMedium = displayMedium.copy(fontFamily = bitCountInk),
+        displaySmall = displaySmall.copy(fontFamily = bitCountInk),
+        headlineLarge = headlineLarge.copy(fontFamily = blackOpsOne),
+        headlineMedium = headlineMedium.copy(fontFamily = blackOpsOne),
+        headlineSmall = headlineSmall.copy(fontFamily = blackOpsOne),
+        titleLarge = titleLarge.copy(fontFamily = spaceGrotesk),
+        titleMedium = titleMedium.copy(fontFamily = spaceGrotesk),
+        titleSmall = titleSmall.copy(fontFamily = spaceGrotesk),
+        bodyLarge = bodyLarge.copy(fontFamily = spaceGrotesk),
+        bodyMedium = bodyMedium.copy(fontFamily = spaceGrotesk),
+        bodySmall = bodySmall.copy(fontFamily = spaceGrotesk),
+        labelLarge = labelLarge.copy(fontFamily = spaceGrotesk),
+        labelMedium = labelMedium.copy(fontFamily = spaceGrotesk),
+        labelSmall = labelSmall.copy(fontFamily = spaceGrotesk),
     )
 }
 

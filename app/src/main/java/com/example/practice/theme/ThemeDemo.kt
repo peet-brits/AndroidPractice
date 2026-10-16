@@ -1,6 +1,5 @@
 package com.example.practice.theme
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
@@ -17,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
-import com.example.practice.ui.theme.Yarndings12
+import com.example.practice.ui.theme.yarndings12
 
 @Composable
 fun ThemeDemo(modifier: Modifier = Modifier) {
@@ -50,17 +49,17 @@ fun ThemeDemo(modifier: Modifier = Modifier) {
         )
         Text(
             text = "abcdefghijklmnopqrstuvwxyz",
-            fontFamily = Yarndings12,
+            fontFamily = yarndings12,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
         )
         Text(
             text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-            fontFamily = Yarndings12,
+            fontFamily = yarndings12,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
         )
         Text(
             text = "0123456789",
-            fontFamily = Yarndings12,
+            fontFamily = yarndings12,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
         )
     }

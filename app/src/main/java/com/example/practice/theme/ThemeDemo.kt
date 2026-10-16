@@ -66,9 +66,9 @@ fun ThemeDemo(modifier: Modifier = Modifier) {
 }
 
 @Preview(showBackground = true)
-//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES) // partly working - ???
+//@Preview(showBackground = true, backgroundColor = 0, uiMode = UI_MODE_NIGHT_YES) // partly working - ???
 @Composable
-fun GreetingPreview() {
+private fun GreetingPreview() {
     PracticeTheme {
         ThemeDemo()
     }

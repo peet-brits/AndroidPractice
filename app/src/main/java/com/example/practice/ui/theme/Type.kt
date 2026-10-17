@@ -23,6 +23,7 @@ val yarndings12 = FontFamily(
 
 val typography = Typography().run {
     copy(
+        //bodyLarge = Typography().bodyMedium - duplicate a value.
         displayLarge = displayLarge.copy(fontFamily = bitCountInk),
         displayMedium = displayMedium.copy(fontFamily = bitCountInk),
         displaySmall = displaySmall.copy(fontFamily = bitCountInk),

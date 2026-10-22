@@ -117,6 +117,18 @@ fun LazyMindMapFlexibleRoot() {
     )
 }
 
+data class MindMapItem(
+    val offset: Offset,
+    val constraints: Constraints,
+    val content: @Composable () -> Unit
+)
+
+data class ProcessedMindMapItem(
+    val placeable: Placeable,
+    val finalXPosition: Int,
+    val finalYPosition: Int,
+)
+
 @Composable
 fun LazyMindMapFlexible(
     items: List<MindMapItem>,
@@ -125,6 +137,12 @@ fun LazyMindMapFlexible(
     mindMapOffset: IntOffset = IntOffset.Zero,
 ) {
     LazyLayout(
+        modifier = modifier
+            .draggable2D(
+                state = rememberDraggable2DState { delta ->
+                    onDrag(delta.round())
+                }
+            ),
         itemProvider = {
             object : LazyLayoutItemProvider {
                 override val itemCount: Int
@@ -152,12 +170,6 @@ fun LazyMindMapFlexible(
                 }
             }
         },
-        modifier = modifier
-            .draggable2D(
-                state = rememberDraggable2DState { delta ->
-                    onDrag(delta.round())
-                }
-            ),
     ) { constraints ->
         val layoutWidth = constraints.maxWidth
         val layoutHeight = constraints.maxHeight
@@ -208,18 +220,6 @@ fun LazyMindMapFlexible(
         }
     }
 }
-
-data class ProcessedMindMapItem(
-    val finalXPosition: Int,
-    val finalYPosition: Int,
-    val placeable: Placeable
-)
-
-data class MindMapItem(
-    val offset: Offset,
-    val constraints: Constraints,
-    val content: @Composable () -> Unit
-)
 
 @Preview(
     showBackground = true

@@ -10,7 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.practice.advanced.OverflowDemo
+import com.example.practice.advanced.LazyMindMapCombinedDemo
 import com.example.practice.ui.theme.PracticeTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +32,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SampleCode(modifier: Modifier = Modifier) {
-    OverflowDemo(modifier)
+    //OverflowDemo(modifier)
+    LazyMindMapCombinedDemo(modifier)
 }
 
 @Preview(showBackground = true)

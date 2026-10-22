@@ -49,10 +49,10 @@ private data class ProcessedMindMapItem(
 @Composable
 fun LazyMindMap(
     items: List<MindMapItem>,
-    mindMapOffset: IntOffset = IntOffset.Zero,
     onDrag: (delta: IntOffset) -> Unit,
-    itemModifier: Modifier = Modifier,
     modifier: Modifier = Modifier,
+    mindMapOffset: IntOffset = IntOffset.Zero,
+    itemModifier: Modifier = Modifier,
 ) {
     LazyLayout(
         modifier = modifier
@@ -112,10 +112,9 @@ fun LazyMindMap(
             )
 
             if (visibleArea.overlaps(extendedItemBounds)) {
-                val placeable = measure(
-                    index = index,
-                    constraints = Constraints()
-                ).first()
+                val placeable = compose(index = index).map {
+                    it.measure(constraints = Constraints())
+                }.first()
                 ProcessedMindMapItem(
                     placeable = placeable,
                     finalXPosition = finalXPosition,

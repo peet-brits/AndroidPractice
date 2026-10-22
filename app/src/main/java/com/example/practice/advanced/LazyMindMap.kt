@@ -6,7 +6,10 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.draggable2D
 import androidx.compose.foundation.gestures.rememberDraggable2DState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -23,7 +26,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
@@ -36,8 +38,8 @@ import com.example.practice.ui.theme.PracticeTheme
 import kotlin.math.roundToInt
 
 data class MindMapItem(
-    val title: String,
-    val percentageOffset: Offset
+    val percentageOffset: Offset,
+    val content: @Composable (modifier: Modifier) -> Unit,
 )
 
 private data class ProcessedMindMapItem(
@@ -54,6 +56,9 @@ fun LazyMindMap(
     mindMapOffset: IntOffset = IntOffset.Zero,
     itemModifier: Modifier = Modifier,
 ) {
+    val boundaryMinSize = 25.dp
+    val boundaryMaxWidth = 200.dp
+    val boundaryMaxHeight = 100.dp
     LazyLayout(
         modifier = modifier
             .draggable2D(
@@ -68,14 +73,10 @@ fun LazyMindMap(
 
                 @Composable
                 override fun Item(index: Int, key: Any) {
-                    Text(
-                        text = items[index].title,
-                        textAlign = TextAlign.Center,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 2,
-                        modifier = itemModifier
-                            .widthIn(min = 50.dp, max = 150.dp)
-                            .heightIn(min = 50.dp, max = 75.dp)
+                    items[index].content(
+                        itemModifier
+                            .widthIn(min = boundaryMinSize, max = boundaryMaxWidth)
+                            .heightIn(min = boundaryMinSize, max = boundaryMaxHeight)
                             .border(
                                 width = 2.dp,
                                 color = Color.LightGray
@@ -102,8 +103,8 @@ fun LazyMindMap(
             val finalYPosition =
                 (item.percentageOffset.y * layoutHeight + layoutHeight / 2 + mindMapOffset.y).roundToInt()
 
-            val maxItemWidth = 150.dp.roundToPx()
-            val maxItemHeight = 75.dp.roundToPx()
+            val maxItemWidth = boundaryMaxWidth.roundToPx()
+            val maxItemHeight = boundaryMaxHeight.roundToPx()
             val extendedItemBounds = IntRect(
                 left = finalXPosition - maxItemWidth / 2,
                 top = finalYPosition - maxItemHeight / 2,
@@ -143,33 +144,59 @@ fun LazyMindMapDemo(modifier: Modifier = Modifier) {
     val mindMapItems = remember {
         listOf(
             MindMapItem(
-                title = "Hello world 1",
                 percentageOffset = Offset(
                     x = 0f,
                     y = 0f
                 )
-            ),
+            ) { modifier ->
+                Text(text = "Hello world 1", modifier = modifier)
+            },
             MindMapItem(
-                title = "Hello world 2",
                 percentageOffset = Offset(
                     x = 1f,
                     y = 0f
                 )
-            ),
+            ) {
+                Column(modifier = it.fillMaxWidth()) {
+                    Text("Hello world 2")
+                    Text("Max width --->")
+                }
+            },
             MindMapItem(
-                title = "Hello world 3",
                 percentageOffset = Offset(
                     x = 0.3f,
                     y = -0.5f
                 )
-            ),
+            ) {
+                Text("Hello world 3 ".repeat(30).trimEnd(), modifier = it)
+            },
             MindMapItem(
-                title = "Hello world 4",
                 percentageOffset = Offset(
                     x = -0.2f,
                     y = 1.5f
                 )
-            ),
+            ) {
+                Text("Hello world 4", modifier = it)
+            },
+            MindMapItem(
+                percentageOffset = Offset(
+                    x = -0.4f,
+                    y = 0f,
+                )
+            ) {
+                Box(modifier = it)
+            },
+            MindMapItem(
+                percentageOffset = Offset(
+                    x = 0f,
+                    y = 0.3f,
+                )
+            ) {
+                Box(modifier = it) {
+                    Text("a")
+                    Text("z", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Right)
+                }
+            }
         )
     }
 

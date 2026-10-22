@@ -27,7 +27,7 @@ fun OverflowLayout(
     isOverflowing: Boolean,
     modifier: Modifier = Modifier,
     mainContent: @Composable () -> Unit,
-    overflowContent: @Composable () -> Unit
+    overflowContent: @Composable () -> Unit,
 ) {
     Column(
         modifier = modifier

@@ -61,11 +61,8 @@ fun OverflowLayout(
     }
 }
 
-@Preview(
-    showBackground = true
-)
 @Composable
-private fun OverflowLayoutPreview() {
+fun OverflowLayoutSolutionDemo() {
     var isOverflowing by remember {
         mutableStateOf(false)
     }
@@ -106,4 +103,12 @@ private fun OverflowLayoutPreview() {
             )
         }
     )
+}
+
+@Preview(
+    showBackground = true
+)
+@Composable
+private fun OverflowLayoutPreview() {
+    OverflowLayoutSolutionDemo()
 }

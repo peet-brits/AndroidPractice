@@ -38,7 +38,7 @@ import com.example.practice.ui.theme.PracticeTheme
 import kotlin.math.roundToInt
 
 data class MindMapItem(
-    val percentageOffset: Offset,
+    val absoluteOffset: Offset,
     val content: @Composable (modifier: Modifier) -> Unit,
 )
 
@@ -99,9 +99,9 @@ fun LazyMindMap(
 
         val visibleItems = items.fastMapIndexedNotNull { index, item ->
             val finalXPosition =
-                (item.percentageOffset.x * layoutWidth + layoutWidth / 2 + mindMapOffset.x).roundToInt()
+                (item.absoluteOffset.x + layoutWidth / 2 + mindMapOffset.x).roundToInt()
             val finalYPosition =
-                (item.percentageOffset.y * layoutHeight + layoutHeight / 2 + mindMapOffset.y).roundToInt()
+                (item.absoluteOffset.y + layoutHeight / 2 + mindMapOffset.y).roundToInt()
 
             val maxItemWidth = boundaryMaxWidth.roundToPx()
             val maxItemHeight = boundaryMaxHeight.roundToPx()
@@ -126,7 +126,7 @@ fun LazyMindMap(
             }
         }
 
-        println("Visible item count: ${visibleItems.size}")
+        println("Visible item count: ${visibleItems.size}, screen size: $layoutWidth x $layoutHeight")
 
         layout(constraints.maxWidth, constraints.maxHeight) {
             visibleItems.fastForEach { item ->
@@ -144,7 +144,7 @@ fun LazyMindMapDemo(modifier: Modifier = Modifier) {
     val mindMapItems = remember {
         listOf(
             MindMapItem(
-                percentageOffset = Offset(
+                absoluteOffset = Offset(
                     x = 0f,
                     y = 0f
                 )
@@ -152,8 +152,8 @@ fun LazyMindMapDemo(modifier: Modifier = Modifier) {
                 Text(text = "Hello world 1", modifier = modifier)
             },
             MindMapItem(
-                percentageOffset = Offset(
-                    x = 1f,
+                absoluteOffset = Offset(
+                    x = 1_100f,
                     y = 0f
                 )
             ) {
@@ -163,33 +163,33 @@ fun LazyMindMapDemo(modifier: Modifier = Modifier) {
                 }
             },
             MindMapItem(
-                percentageOffset = Offset(
-                    x = 0.3f,
-                    y = -0.5f
+                absoluteOffset = Offset(
+                    x = 300f,
+                    y = -1_700f
                 )
             ) {
                 Text("Hello world 3 ".repeat(30).trimEnd(), modifier = it)
             },
             MindMapItem(
-                percentageOffset = Offset(
-                    x = -0.2f,
-                    y = 1.5f
+                absoluteOffset = Offset(
+                    x = -200f,
+                    y = 3_000f
                 )
             ) {
                 Text("Hello world 4", modifier = it)
             },
             MindMapItem(
-                percentageOffset = Offset(
-                    x = -0.4f,
+                absoluteOffset = Offset(
+                    x = -400f,
                     y = 0f,
                 )
             ) {
                 Box(modifier = it)
             },
             MindMapItem(
-                percentageOffset = Offset(
+                absoluteOffset = Offset(
                     x = 0f,
-                    y = 0.3f,
+                    y = 600f,
                 )
             ) {
                 Box(modifier = it) {

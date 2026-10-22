@@ -1,6 +1,5 @@
 package com.example.practice.advanced.solution
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.draggable2D
 import androidx.compose.foundation.gestures.rememberDraggable2DState
@@ -118,13 +117,12 @@ fun LazyMindMapFlexibleRoot() {
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyMindMapFlexible(
     items: List<MindMapItem>,
-    mindMapOffset: IntOffset = IntOffset.Zero,
     onDrag: (delta: IntOffset) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    mindMapOffset: IntOffset = IntOffset.Zero,
 ) {
     LazyLayout(
         itemProvider = {
@@ -187,10 +185,9 @@ fun LazyMindMapFlexible(
             )
 
             if (visibleArea.overlaps(extendedItemBounds)) {
-                val placeables = measure(
-                    index = index,
-                    constraints = item.constraints
-                )
+                val placeables = compose(index = index).map {
+                    it.measure(constraints = item.constraints)
+                }
                 placeables.map {
                     ProcessedMindMapItem(
                         finalXPosition = finalXPosition,

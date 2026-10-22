@@ -2,10 +2,7 @@ package com.example.practice.advanced
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,17 +20,15 @@ fun OverflowDemo(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
     ) {
-        Button(onClick = { isOverflowing = !isOverflowing }) {
-            Text("Toggle Overflow")
-        }
         OverflowLayoutDemo(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            isOverflowing = isOverflowing
+                .fillMaxWidth(),
+            isOverflowing = isOverflowing,
+            onOverflowClick = { isOverflowing = !isOverflowing }
         )
         HorizontalDivider(thickness = 2.dp)
         OverflowLayoutSolutionDemo()
+        HorizontalDivider(thickness = 2.dp)
     }
 }
 

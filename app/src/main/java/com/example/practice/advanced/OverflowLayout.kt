@@ -2,12 +2,9 @@ package com.example.practice.advanced
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -17,8 +14,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.fastForEach
+import androidx.compose.ui.util.fastMaxOfOrNull
 import com.example.practice.icons.AppIcons
 import com.example.practice.ui.theme.PracticeTheme
 
@@ -29,28 +29,21 @@ fun OverflowLayout(
     mainContent: @Composable () -> Unit,
     overflowContent: @Composable () -> Unit,
 ) {
-    Column(
+    SubcomposeLayout(
         modifier = modifier
-            .width(IntrinsicSize.Max)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            mainContent()
-            Icon(
-                imageVector = if (isOverflowing) AppIcons.KeyboardArrowUp else AppIcons.KeyboardArrowDown,
-                contentDescription = if (isOverflowing) "Up" else "Down",
-            )
+    ) { constraints ->
+        val mainMeasurables = subcompose("main_content", mainContent)
+        val mainPlaceableLists = mainMeasurables.map {
+            it.measure(constraints.copy(minWidth = 0, minHeight = 0))
         }
-        if (isOverflowing) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.Yellow)
-            ) {
-                overflowContent()
+
+        val maxHeight = mainPlaceableLists.fastMaxOfOrNull { it.height } ?: 0
+
+        layout(constraints.maxWidth, maxHeight) {
+            var xOffset = 0
+            mainPlaceableLists.fastForEach { placeable ->
+                placeable.place(xOffset, 0)
+                xOffset += placeable.width
             }
         }
     }
@@ -65,10 +58,25 @@ fun OverflowLayoutDemo(
         isOverflowing,
         modifier = modifier,
         mainContent = {
-            Text("Main content")
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text("Main content")
+                Icon(
+                    imageVector = if (isOverflowing) AppIcons.KeyboardArrowUp else AppIcons.KeyboardArrowDown,
+                    contentDescription = if (isOverflowing) "Up" else "Down",
+                )
+            }
         },
         overflowContent = {
-            Text("Overflow content secret")
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Yellow),
+                text = "Overflow content secret"
+            )
         },
     )
 }

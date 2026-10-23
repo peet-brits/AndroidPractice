@@ -4,24 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
-import com.example.practice.views.Project
-import com.example.practice.views.ProjectCard
-import com.example.practice.views.ProjectData
-import com.example.practice.views.ProjectScreen
-import com.example.practice.views.baconIpsum
+import com.example.practice.views.ProjectCardDemo
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainScreen(modifier = Modifier.padding(innerPadding))
+                    Demo(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -38,54 +28,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
-    LazyColumn(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        item {
-            ProjectScreen(
-                project = ProjectData(
-                    heading = "My Solution",
-                    description = "This is a preview.",
-                    formattedDateTime = "Mar 5, 10:00"
-                )
-            )
-        }
-        item {
-            ProjectCard(
-                project = Project(
-                    title = "Sample Solution",
-                    description = "This is a preview.",
-                    formattedDateTime = "Mar 5, 10:00"
-                )
-            )
-        }
-        item {
-            ProjectScreen(
-                project = ProjectData(
-                    heading = "My ${baconIpsum.lowercase()}",
-                    description = baconIpsum,
-                    formattedDateTime = "Mar 5, 10:00"
-                )
-            )
-        }
-        item {
-            ProjectCard(
-                project = Project(
-                    title = "Sample ${baconIpsum.lowercase()}",
-                    description = baconIpsum,
-                    formattedDateTime = "Mar 5, 10:00"
-                )
-            )
-        }
-    }
+fun Demo(modifier: Modifier = Modifier) {
+    ProjectCardDemo(modifier)
 }
 
 @Preview(showBackground = true, heightDp = 1200)
 @Composable
-fun MainScreenPreview() {
+fun DemoPreview() {
     PracticeTheme {
-        MainScreen()
+        Demo()
     }
 }

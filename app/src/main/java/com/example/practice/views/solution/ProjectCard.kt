@@ -1,4 +1,4 @@
-package com.example.practice.views
+package com.example.practice.views.solution
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

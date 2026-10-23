@@ -35,12 +35,15 @@ private fun BasicScreen() {
 }
 
 @Composable
-private fun Demo(modifier: Modifier = Modifier) {
+fun Demo(modifier: Modifier = Modifier) {
+    //ThemeDemo(modifier)
+    //ProjectCardDemo(modifier)
+    //ClipDemoScreen(modifier)
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun DemoPreview() {
+fun DemoPreview() {
     PracticeTheme {
         Demo()
     }

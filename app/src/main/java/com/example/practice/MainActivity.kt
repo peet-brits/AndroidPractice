@@ -18,11 +18,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ColumnDividerDemo(
+                    Demo(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Demo(modifier: Modifier = Modifier) {
+    //ThemeDemo(modifier)
+    //ProjectCardDemo(modifier)
+    //ColumnDividerDemo(modifier)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DemoPreview() {
+    PracticeTheme {
+        Demo()
     }
 }

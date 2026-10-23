@@ -33,6 +33,7 @@ fun Demo(modifier: Modifier = Modifier) {
     //ThemeDemo(modifier)
     //ProjectCardDemo(modifier)
     //ColumnDividerDemo(modifier)
+    //ClipDemoScreen(modifier)
 }
 
 @Preview(showBackground = true)

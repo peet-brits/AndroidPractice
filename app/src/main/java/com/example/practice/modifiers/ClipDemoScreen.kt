@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
 
 @Composable
-fun ClipDemoScreen() {
+fun ClipDemoScreen(modifier: Modifier = Modifier) {
     Text(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(
                 topStart = 48.dp,
                 topEnd = 48.dp

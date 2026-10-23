@@ -32,9 +32,10 @@ class MainActivity : ComponentActivity() {
 fun Demo(modifier: Modifier = Modifier) {
     //ThemeDemo(modifier)
     //ProjectCardDemo(modifier)
+    //ClipDemoScreen(modifier)
 }
 
-@Preview(showBackground = true, heightDp = 1200)
+@Preview(showBackground = true)
 @Composable
 fun DemoPreview() {
     PracticeTheme {

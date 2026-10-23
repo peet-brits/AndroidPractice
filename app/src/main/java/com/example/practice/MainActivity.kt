@@ -18,19 +18,28 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PracticeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Demo(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                    )
-                }
+                BasicScreen()
+                //MaterialScreen()
             }
         }
     }
 }
 
 @Composable
+private fun BasicScreen() {
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Demo(
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+}
+
+@Composable
 fun Demo(modifier: Modifier = Modifier) {
+    //ThemeDemo(modifier)
+    //ProjectCardDemo(modifier)
+    //ColumnDividerDemo(modifier)
+    //ClipDemoScreen(modifier)
     //OverflowDemo(modifier)
     //LazyMindMapDemo(modifier)
     //LazyMindMapFlexibleRoot()

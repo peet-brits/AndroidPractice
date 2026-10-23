@@ -1,4 +1,4 @@
-package com.example.practice.views
+package com.example.practice.layouts
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

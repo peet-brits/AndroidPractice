@@ -18,13 +18,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PracticeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Demo(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                BasicScreen()
+                //MaterialScreen()
             }
         }
+    }
+}
+
+@Composable
+private fun BasicScreen() {
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Demo(
+            modifier = Modifier.padding(innerPadding)
+        )
     }
 }
 

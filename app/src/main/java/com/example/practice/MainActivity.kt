@@ -10,8 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.practice.advanced.LazyMindMapDemo
-import com.example.practice.advanced.solution.LazyMindMapFlexibleRoot
 import com.example.practice.ui.theme.PracticeTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SampleCode(
+                    Demo(
                         modifier = Modifier
                             .padding(innerPadding)
                     )
@@ -32,16 +30,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SampleCode(modifier: Modifier = Modifier) {
+fun Demo(modifier: Modifier = Modifier) {
     //OverflowDemo(modifier)
-    LazyMindMapDemo(modifier)
+    //LazyMindMapDemo(modifier)
     //LazyMindMapFlexibleRoot()
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SampleCodePreview() {
+fun DemoPreview() {
     PracticeTheme {
-        SampleCode()
+        Demo()
     }
 }

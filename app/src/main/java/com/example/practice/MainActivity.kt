@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.practice.theme.ThemeDemo
 import com.example.practice.ui.theme.PracticeTheme
+import com.example.practice.views.ProjectCardDemo
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +32,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Demo(modifier: Modifier = Modifier) {
-    ThemeDemo(modifier)
+    //ProjectCardDemo(modifier)
+    //ThemeDemo(modifier)
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, heightDp = 1200)
 @Composable
 fun DemoPreview() {
     PracticeTheme {

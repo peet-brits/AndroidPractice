@@ -36,10 +36,20 @@ private fun BasicScreen() {
 
 @Composable
 fun Demo(modifier: Modifier = Modifier) {
-    //ThemeDemo(modifier)
+    // layouts
     //ProjectCardDemo(modifier)
+
+    // tasky
     //ColumnDividerDemo(modifier)
+
+    // modifiers
     //ClipDemoScreen(modifier)
+
+    // theme
+    //ThemeDemo(modifier)
+
+    // advanced layouts & modifiers
+    //IntrinsicDemo(modifier) -- preview only
     //OverflowDemo(modifier)
     //LazyMindMapDemo(modifier)
     //LazyMindMapFlexibleRoot()

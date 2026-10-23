@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.practice.theme.ThemeDemo
 import com.example.practice.ui.theme.PracticeTheme
 import com.example.practice.views.ProjectCardDemo
 
@@ -20,7 +21,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Demo(modifier = Modifier.padding(innerPadding))
+                    Demo(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
@@ -29,7 +32,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Demo(modifier: Modifier = Modifier) {
-    ProjectCardDemo(modifier)
+    //ProjectCardDemo(modifier)
+    //ThemeDemo(modifier)
 }
 
 @Preview(showBackground = true, heightDp = 1200)

@@ -1,4 +1,4 @@
-package com.example.practice.demo
+package com.example.practice.modifiers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.example.practice.ui.theme.PracticeTheme
 
 @Composable
-fun DemoScreen() {
+fun ClipDemoScreen() {
     Text(
         modifier = Modifier
             .clip(RoundedCornerShape(
@@ -31,8 +31,8 @@ fun DemoScreen() {
 
 @Preview(showBackground = true)
 @Composable
-private fun DemoScreenPreview() {
+private fun ClipDemoScreenPreview() {
     PracticeTheme {
-        DemoScreen()
+        ClipDemoScreen()
     }
 }

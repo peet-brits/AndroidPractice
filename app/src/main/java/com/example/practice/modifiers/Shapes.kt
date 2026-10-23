@@ -1,4 +1,4 @@
-package com.example.practice.demo
+package com.example.practice.modifiers
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline

@@ -1,4 +1,4 @@
-package com.example.practice.demo
+package com.example.practice.modifiers
 
 import androidx.compose.ui.geometry.Offset
 import kotlin.math.cos

@@ -36,6 +36,9 @@ private fun BasicScreen() {
 
 @Composable
 fun Demo(modifier: Modifier = Modifier) {
+    // material 3
+    // See above: MaterialScreen() instead of BasicScreen()
+
     // layouts
     //ProjectCardDemo(modifier)
 

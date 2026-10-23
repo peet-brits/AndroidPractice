@@ -1,52 +1,15 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.example.practice
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.window.core.layout.WindowSizeClass
-import com.example.practice.icons.AppIcons
-import com.example.practice.icons.AppIconsFilled
 import com.example.practice.ui.theme.PracticeTheme
 
 class MainActivity : ComponentActivity() {
@@ -55,303 +18,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PracticeTheme {
-                val showBottomAppBar = false
-                //val windowClass = calculateWindowSizeClass(this) // this requires an activity.
-                //val isBigScreen = windowClass.widthSizeClass > WindowWidthSizeClass.Compact
-                MainScreen(showBottomAppBar = showBottomAppBar)
-            }
-        }
-    }
-}
-
-data class NavigationItem(
-    val title: String,
-    //val route: String,
-    val unselectedIcon: ImageVector,
-    val selectedIcon: ImageVector,
-    val hasNews: Boolean,
-    val badgeCount: Int? = null
-)
-
-@Composable
-private fun MainScreen(
-    showBottomAppBar: Boolean = false
-) {
-    val items = listOf(
-        NavigationItem(
-            title = "Home",
-            unselectedIcon = AppIcons.Home,
-            selectedIcon = AppIconsFilled.Home,
-            hasNews = false
-        ),
-        NavigationItem(
-            title = "Chat",
-            unselectedIcon = AppIcons.Chat,
-            selectedIcon = AppIconsFilled.Chat,
-            hasNews = false,
-            badgeCount = 12
-        ),
-        NavigationItem(
-            title = "Settings",
-            unselectedIcon = AppIcons.Settings,
-            selectedIcon = AppIconsFilled.Settings,
-            hasNews = true
-        )
-    )
-
-    // The main decider is width, but I'm adding height because a phone in landscape mode doesn't have enough space to show all the icons.
-    val isBigScreen = currentWindowAdaptiveInfoV2().windowSizeClass.isAtLeastBreakpoint(
-        widthDpBreakpoint = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
-        heightDpBreakpoint = WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND
-    )
-
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(0)
-    }
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = "My notes")
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = AppIcons.ArrowBack,
-                            contentDescription = "Go back"
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = AppIcons.Favourite,
-                            contentDescription = "Mark as favourite"
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = AppIcons.Edit,
-                            contentDescription = "Edit notes"
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior
-            )
-        },
-        bottomBar = {
-            if (showBottomAppBar) {
-                BottomAppBar(
-                    actions = {
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = AppIcons.Share,
-                                contentDescription = "Share contact"
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = AppIcons.Favourite,
-                                contentDescription = "Mark as favourite"
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = AppIcons.Mail,
-                                contentDescription = "Email contact"
-                            )
-                        }
-                    },
-                    floatingActionButton = {
-                        FloatingActionButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = AppIcons.Call,
-                                contentDescription = "Call contact"
-                            )
-                        }
-                    }
-                )
-            } else if (!isBigScreen) {
-                NavigationBar {
-                    items.forEachIndexed { index, item ->
-                        NavigationBarItem(
-                            selected = selectedItemIndex == index,
-                            onClick = {
-                                selectedItemIndex = index
-                                //navController.navigate(item.route)
-                            },
-                            label = {
-                                Text(text = item.title)
-                            },
-                            //alwaysShowLabel = false,
-                            icon = {
-                                BadgedBox(
-                                    badge = {
-                                        if (item.badgeCount != null) {
-                                            Badge {
-                                                Text(text = item.badgeCount.toString())
-                                            }
-                                        } else if (item.hasNews) {
-                                            Badge()
-                                        }
-                                    }
-                                ) {
-                                    Icon(
-                                        imageVector = if (index == selectedItemIndex)
-                                            item.selectedIcon
-                                        else
-                                            item.unselectedIcon,
-                                        contentDescription = item.title
-                                    )
-                                }
-                            }
-                        )
-                    }
-                }
-            }
-        }
-    ) { innerPadding ->
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            if (isBigScreen) {
-                NavigationSideBar(
-                    items = items,
-                    selectedItemIndex = selectedItemIndex,
-                    onNavigate = { selectedItemIndex = it }
-                )
-            }
-
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-            ) {
-                items(100) {
-                    Text(
-                        text = "Item $it",
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
+                BasicScreen()
+                //MaterialScreen()
             }
         }
     }
 }
 
 @Composable
-fun NavigationSideBar(
-    items: List<NavigationItem>,
-    selectedItemIndex: Int,
-    onNavigate: (Int) -> Unit
-) {
-    NavigationRail(
-        header = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = AppIcons.Menu,
-                    contentDescription = "Menu"
-                )
-            }
-            FloatingActionButton(
-                onClick = { /*TODO*/ },
-                elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
-            ) {
-                Icon(
-                    imageVector = AppIcons.Add,
-                    contentDescription = "Add"
-                )
-            }
-        },
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.inverseOnSurface)
-            .offset(x = (-1).dp)
-    ) {
-        Column(
-            modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Bottom)
-        ) {
-            items.forEachIndexed { index, item ->
-                NavigationRailItem(
-                    selected = selectedItemIndex == index,
-                    onClick = {
-                        onNavigate(index)
-                    },
-                    icon = {
-                        NavigationIcon(
-                            item = item,
-                            selected = selectedItemIndex == index
-                        )
-                    },
-                    label = {
-                        Text(text = item.title)
-                    },
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun NavigationIcon(
-    item: NavigationItem,
-    selected: Boolean
-) {
-    BadgedBox(
-        badge = {
-            if (item.badgeCount != null) {
-                Badge {
-                    Text(text = item.badgeCount.toString())
-                }
-            } else if (item.hasNews) {
-                Badge()
-            }
-        }
-    ) {
-        Icon(
-            imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-            contentDescription = item.title
+private fun BasicScreen() {
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Demo(
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }
 
-@Preview(showBackground = true, name = "Bottom App Bar", heightDp = 400)
 @Composable
-private fun MainScreenPreviewBottomAppBar() {
-    PracticeTheme(darkTheme = false) {
-        MainScreen(
-            showBottomAppBar = true
-        )
-    }
+private fun Demo(modifier: Modifier = Modifier) {
 }
 
-@Preview(showBackground = true, name = "Bottom Navigation Bar", heightDp = 400)
+@Preview(showBackground = true)
 @Composable
-private fun MainScreenPreviewBottomNav() {
-    PracticeTheme(darkTheme = false) {
-        MainScreen(
-            showBottomAppBar = false
-        )
-    }
-}
-
-//@PreviewScreenSizes
-@Preview(
-    showBackground = true,
-    name = "Navigation Bar",
-//    device = Devices.PHONE + ",orientation=landscape"
-//    device = Devices.TABLET
-    widthDp = 600, // medium = 600
-    heightDp = 500 // medium = 480
-)
-@Composable
-private fun MainScreenPreviewNavBar() {
-    PracticeTheme(darkTheme = false) {
-        MainScreen()
+private fun DemoPreview() {
+    PracticeTheme {
+        Demo()
     }
 }

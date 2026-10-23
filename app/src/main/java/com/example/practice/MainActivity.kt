@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -22,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TestDisplay(
+                    Demo(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -32,19 +30,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TestDisplay(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        ThemeDemo()
-    }
+fun Demo(modifier: Modifier = Modifier) {
+    ThemeDemo(modifier)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun TestDisplayPreview() {
+fun DemoPreview() {
     PracticeTheme {
-        TestDisplay()
+        Demo()
     }
 }

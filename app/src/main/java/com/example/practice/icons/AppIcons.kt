@@ -15,6 +15,8 @@ object AppIcons {
     val Edit @Composable get() = ImageVector.vectorResource(R.drawable.ic_edit)
     val Favourite @Composable get() = ImageVector.vectorResource(R.drawable.ic_favorite)
     val Home @Composable get() = ImageVector.vectorResource(R.drawable.ic_home)
+    val KeyboardArrowUp @Composable get() = ImageVector.vectorResource(R.drawable.ic_keyboard_arrow_up)
+    val KeyboardArrowDown @Composable get() = ImageVector.vectorResource(R.drawable.ic_keyboard_arrow_down)
     val Mail @Composable get() = ImageVector.vectorResource(R.drawable.ic_mail)
     val Menu @Composable get() = ImageVector.vectorResource(R.drawable.ic_menu)
     val MoreHoriz @Composable get() = ImageVector.vectorResource(R.drawable.ic_more_horiz)
